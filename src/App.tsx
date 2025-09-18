@@ -13,6 +13,11 @@ import BestSellingProducts from './Components/SellingProduct';
 import ShopItem from './Components/Shop';
 import Home from './Components/Home';
 import KapeePage from './Components/Pages';
+import Login from './Components/login';
+import DashboardLayout from './dashboard/dashboardlayout';
+import Dashboard from './dashboard/dashboard';
+import ProductDashboard from './dashboard/ProductDashboard';
+import RegisterForm from './Components/RegistrationForm';
 function App() {
 
   return (
@@ -21,6 +26,9 @@ function App() {
         <Routes>
           <Route path="/" element={<LayoutHandling/>}>
             <Route index element={<EcommerceHero/>}/>
+            <Route path="home" element={<Home />} />
+            <Route path= "login"element={<Login onClose={()=> window.history.back()} />}/>
+            <Route path='/registration' element={<RegisterForm/>} />
             <Route path="/Product" element={<ProductCard />} />
             <Route path="contact" element={<Contact />} />
             <Route path="blog" element={<BlogPage />} />
@@ -28,8 +36,13 @@ function App() {
             <Route path="freeshipping" element={<Product1 />} />
             <Route path="selling" element={<BestSellingProducts />} />
             <Route path="shop" element={<ShopItem />} />
-            <Route path="home" element={<Home />} />
             <Route path= "Pages"element={<KapeePage/>}/>
+            
+            </Route>
+            <Route path="/dashboard" element={<DashboardLayout children={undefined}/>}>
+            <Route index element={<Dashboard/>}/>
+            <Route path="products" element={<ProductDashboard />} />
+            
             </Route>
         </Routes>
       </BrowserRouter>

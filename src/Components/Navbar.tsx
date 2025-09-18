@@ -1,5 +1,6 @@
 import React from "react";
 import { Search, User, ShoppingCart, Menu } from "lucide-react"; // Added Menu icon
+import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   return (
@@ -27,6 +28,7 @@ const Navbar: React.FC = () => {
         </button>
 
         {/* User */}
+        <Link to="/login">
         <div className="hidden cursor-pointer md:flex md:items-center md:space-x-1 hover:text-yellow-400">
           <User />
           <span className="text-sm">
@@ -35,6 +37,7 @@ const Navbar: React.FC = () => {
             <span className="font-semibold">SIGN IN</span>
           </span>
         </div>
+        </Link>
 
         {/* Shopping Cart */}
         <div className="flex items-center space-x-1 cursor-pointer">
