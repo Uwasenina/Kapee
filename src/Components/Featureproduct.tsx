@@ -200,6 +200,7 @@ const FeaturedProducts: React.FC = () => {
           {products.map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}
+          
         </div>
 
         {/* Load More Section */}

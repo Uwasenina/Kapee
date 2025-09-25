@@ -74,10 +74,10 @@ const ProductDashboard: React.FC = () => {
                 </td>
                 <td className="p-4">{product.category}</td>
                 <td className="p-4 space-x-2">
-                  <button className="px-3 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-600">
+                  <button className="px-3 py-1 text-sm text-white bg-yellow-600 rounded hover:bg-gray-600">
                     Edit
                   </button>
-                  <button className="px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-600">
+                  <button className="px-3 py-1 text-sm text-white bg-yellow-600 rounded hover:bg-gray-600">
                     Delete
                   </button>
                 </td>

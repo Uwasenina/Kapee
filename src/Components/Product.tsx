@@ -1,5 +1,5 @@
 import React from "react";
-import { Heart } from "lucide-react";
+import { Heart, ShoppingCart, Shuffle, Eye } from "lucide-react";
 
 // Types
 interface Product {
@@ -33,7 +33,7 @@ const featuredProducts: Product[] = [
     price: "$199.00",
     oldPrice: "$254.00",
     discount: "22% OFF",
-    image: "../Apple-iPhone-11-Pro-Max.jpg",
+    image: "../Apple-iPhone-11-Pro-Max-256GB.jpg",
   },
   {
     id: 3,
@@ -41,7 +41,7 @@ const featuredProducts: Product[] = [
     category: "Electronics",
     price: "$499.00 - $599.00",
     discount: "17% OFF",
-    image: "../Apple-Watch.jpg",
+    image: "../aa.jpg",
   },
   {
     id: 4,
@@ -88,7 +88,7 @@ const featuredProducts: Product[] = [
     title: "Apple Watch Series 5 Black",
     category: "Electronics",
     price: "$599.00",
-    image: "../Apple-Watch-Series-5.jpg",
+    image: "../apple-watch-series-5.jpg",
   },
 ];
 
@@ -157,7 +157,16 @@ const FeaturedProductsCard: React.FC = () => (
             src={product.image}
             alt={product.title}
             className="mb-2 transition-transform duration-300 rounded-md hover:scale-110"
+            
           />
+          <div className="flex flex-row items-center justify-between h-8 bg-yellow-400 cursor-pointer w-15 hover:bg-yellow-500">
+          <Shuffle className="w-5 h-5 m-1 text-white" size={15}/>
+          <ShoppingCart className="w-5 h-5 m-1 text-white" size={15}/>
+          <Eye className="w-5 h-5 m-1 text-white" size={15}/> 
+          
+
+          </div>
+    
           <p className="text-xs text-gray-500 uppercase">{product.category}</p>
           <h3 className="text-sm font-semibold leading-tight">{product.title}</h3>
           <div className="flex items-center gap-2">
@@ -165,7 +174,9 @@ const FeaturedProductsCard: React.FC = () => (
             {product.oldPrice && (
               <p className="text-xs text-gray-400 line-through">{product.oldPrice}</p>
             )}
+            
           </div>
+          
         </div>
       ))}
     </div>

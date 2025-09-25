@@ -1,5 +1,5 @@
 import React from "react";
-import { Search, User, ShoppingCart, Menu } from "lucide-react"; // Added Menu icon
+import { Search, User, ShoppingCart, Menu, Heart } from "lucide-react"; // Added Menu icon
 import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
@@ -36,6 +36,13 @@ const Navbar: React.FC = () => {
             <br />
             <span className="font-semibold">SIGN IN</span>
           </span>
+        </div>
+        </Link>
+        {/* Wishlist */}
+        <Link to="/wishlist">
+        <div className="hidden cursor-pointer md:flex md:items-center md:space-x-1 hover:text-yellow-400">
+          <Heart size={25} />
+          
         </div>
         </Link>
 

@@ -157,7 +157,7 @@ const EcommerceHero: React.FC = () => {
             </div>
 
             {/* Image Section */}
-            <div className="relative flex items-center justify-center flex-1 mt-8 md:mt-0">
+            <div className="relative flex items-center justify-center flex-1 mt-10 md:mt-2">
               <img
                 src="https://kapee.presslayouts.com/wp-content/uploads/2020/07/JBL-On-Ear-Headphones.jpg"
                 alt="headset"
