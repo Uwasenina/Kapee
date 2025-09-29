@@ -4,8 +4,10 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Notify } from "notiflix";
 import { X, Eye, EyeOff } from "lucide-react";
+import createAxiosClient from "../hooks/axiosClient";
 
 function RegisterModal() {
+  const apiClient = createAxiosClient();
   const [isOpen, setIsOpen] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -28,18 +30,19 @@ function RegisterModal() {
         return;
       }
 
-      const response = await axios.post("http://localhost:3000/api/userRegistration", {
+      const response = await apiClient.post("/userRegistration", {
         fullName: data.fullName, 
         email: data.email,
         password: data.password,
-        confirmPassword: data.confirmPassword,
-        userRole: data.useRole || "general_user",
+        confirmPassword: data.confirmPassword
       });
+      console.log("Registration response:", response.data);
 
       Notify.success(response.data.message || "Registration successful!");
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
+      window.location.href = "/login";
 
       reset();
       handleClose();

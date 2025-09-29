@@ -2,40 +2,52 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import Notiflix from "notiflix";
+import createAxiosClient, { setToken } from "../hooks/axiosClient";
+import { useAuth } from "../context/Authcontext"; // Add this import
 
 interface LoginFormInputs {
   email: string;
   password: string;
 }
 
-
+const apiClient = createAxiosClient();
 const Login: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm<LoginFormInputs>();
+  const { login } = useAuth(); // Add this line
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
       setLoading(true);
-      console.log("Sending login request with:", data);
-
-      const res = await axios.post("http://localhost:3000/api/login", {
+      // Clear any existing tokens before login attempt
+      const res = await apiClient.post("/login", {
         email: data.email,
         password: data.password,
       });
-      const { accessToken, userRole, fullName } = res.data.user;
+      const { token, userRole, fullName, _id, id } = res.data.user;
 
-      // Save token & role
-      localStorage.setItem("accessToken", accessToken);
+      // Save token & role (keep your existing localStorage for backward compatibility)
+      setToken(token);
       localStorage.setItem("userRole", userRole);
       localStorage.setItem("fullName", fullName);
 
+      // ✅ IMPORTANT: Update AuthContext with user data
+      login(token, {
+        _id: _id || id || res.data.user.userId, // Handle different ID field names
+        email: data.email, // Use the email from form
+        fullName: fullName,
+        role: userRole,
+        userRole: userRole,
+        username: fullName
+      });
+
+      console.log("✅ AuthContext updated with user data");
+
       // Role check
       if (userRole === "admin") {
-
         Notiflix.Notify.success("Login successful as Admin!");
         navigate("/dashboard");
       } else {
@@ -43,6 +55,7 @@ const Login: React.FC = () => {
         navigate("/");
       }
     } catch (err: any) {
+      console.error("❌ Login error:", err);
       Notiflix.Notify.failure(
         err.response?.data?.message || "Login failed. Try again."
       );

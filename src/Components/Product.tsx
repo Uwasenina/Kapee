@@ -1,5 +1,8 @@
 import React from "react";
+import { useCart, type CartItem } from "./CartContext";
 import { Heart, ShoppingCart, Shuffle, Eye } from "lucide-react";
+import { useState, useEffect } from "react";
+import createAxiosClient from "../hooks/axiosClient";
 
 // Types
 interface Product {
@@ -26,6 +29,7 @@ const hotDeal = {
 };
 
 const featuredProducts: Product[] = [
+  
   {
     id: 2,
     title: "Apple iPhone 11 Pro Max",
@@ -128,60 +132,82 @@ const HotDealCard: React.FC = () => (
   </div>
 );
 
-const FeaturedProductsCard: React.FC = () => (
-  <div className="w-full p-4 border shadow-md rounded-2xl">
-    <div className="flex items-center justify-between mb-4">
-      <h2 className="text-xl font-bold">Featured Products</h2>
-      <button className="text-sm font-semibold text-yellow-600">VIEW ALL</button>
-    </div>
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-      {featuredProducts.map((product, i) => (
-        <div
-          key={product.id}
-          className="relative p-3 transition duration-300 transform border shadow-sm opacity-0 rounded-xl hover:scale-105 hover:shadow-lg animate-fadeIn"
-          style={{ animationDelay: `${i * 0.1}s` }}
-        >
-          {product.discount && (
-            <span className="absolute px-2 py-1 text-xs text-white bg-green-500 rounded top-2 left-2">
-              {product.discount}
-            </span>
-          )}
-          {product.featured && (
-            <span className="absolute px-2 py-1 text-xs text-white bg-yellow-500 rounded top-2 left-2">
-              FEATURED
-            </span>
-          )}
-          <Heart className="absolute w-4 h-4 text-gray-400 top-2 right-2" />
+const FeaturedProductsCard: React.FC = () => {
+  const { addToCart } = useCart();
+  const [products, setProducts] = useState<Product[]>([]);
+  const apiClient = createAxiosClient();
 
-          <img
-            src={product.image}
-            alt={product.title}
-            className="mb-2 transition-transform duration-300 rounded-md hover:scale-110"
-            
-          />
-          <div className="flex flex-row items-center justify-between h-8 bg-yellow-400 cursor-pointer w-15 hover:bg-yellow-500">
-          <Shuffle className="w-5 h-5 m-1 text-white" size={15}/>
-          <ShoppingCart className="w-5 h-5 m-1 text-white" size={15}/>
-          <Eye className="w-5 h-5 m-1 text-white" size={15}/> 
-          
-
-          </div>
-    
-          <p className="text-xs text-gray-500 uppercase">{product.category}</p>
-          <h3 className="text-sm font-semibold leading-tight">{product.title}</h3>
-          <div className="flex items-center gap-2">
-            <p className="text-sm font-bold text-yellow-600">{product.price}</p>
-            {product.oldPrice && (
-              <p className="text-xs text-gray-400 line-through">{product.oldPrice}</p>
+  useEffect(() => {
+    apiClient.get("/products")
+      .then(res => setProducts(res.data.products || []))
+      .catch(err => console.error("Error fetching products:", err));
+  }, []);
+  return (
+    <div className="w-full p-4 border shadow-md rounded-2xl">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-bold">Featured Products</h2>
+        <button className="text-sm font-semibold text-yellow-600">VIEW ALL</button>
+      </div>
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        {featuredProducts.map((product, i) => (
+          <div
+            key={product.id}
+            className="relative p-3 transition duration-300 transform border shadow-sm opacity-0 rounded-xl hover:scale-105 hover:shadow-lg animate-fadeIn"
+            style={{ animationDelay: `${i * 0.1}s` }}
+          >
+            {product.discount && (
+              <span className="absolute px-2 py-1 text-xs text-white bg-green-500 rounded top-2 left-2">
+                {product.discount}
+              </span>
             )}
+            {product.featured && (
+              <span className="absolute px-2 py-1 text-xs text-white bg-yellow-500 rounded top-2 left-2">
+                FEATURED
+              </span>
+            )}
+            <Heart className="absolute w-4 h-4 text-gray-400 top-2 right-2" />
+
+            <img
+              src={product.image}
+              alt={product.title}
+              className="mb-2 transition-transform duration-300 rounded-md hover:scale-110"
+              
+            />
+            <div className="flex flex-row items-center justify-between h-8 bg-yellow-400 cursor-pointer w-15 hover:bg-yellow-500">
+              <Shuffle className="w-5 h-5 m-1 text-white" size={15}/>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  addToCart({
+                    id: product.id.toString(),
+                    name: product.title,
+                    price: Number(product.price.replace(/[^0-9.]/g, "")),
+                    image: product.image,
+                  });
+                }}
+                className="flex items-center justify-center flex-1 p-2 transition-colors bg-gray-100 rounded-md hover:bg-yellow-400"
+              >
+                <ShoppingCart size={18} className="text-black" />
+              </button>
+              <Eye className="w-5 h-5 m-1 text-white" size={15}/> 
+            </div>
+      
+            <p className="text-xs text-gray-500 uppercase">{product.category}</p>
+            <h3 className="text-sm font-semibold leading-tight">{product.title}</h3>
+            <div className="flex items-center gap-2">
+              <p className="text-sm font-bold text-yellow-600">{product.price}</p>
+              {product.oldPrice && (
+                <p className="text-xs text-gray-400 line-through">{product.oldPrice}</p>
+              )}
+              
+            </div>
             
           </div>
-          
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 // Custom animation (add in globals.css or tailwind.config if needed)
 const styles = `

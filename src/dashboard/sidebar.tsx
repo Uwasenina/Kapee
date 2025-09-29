@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { path } from 'framer-motion/client';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 // Sidebar Component
 const Sidebar = ({ activeItem, setActiveItem }: { activeItem: string, setActiveItem: (item: string) => void }) => {
@@ -30,7 +30,7 @@ const Sidebar = ({ activeItem, setActiveItem }: { activeItem: string, setActiveI
     { id: 'dashboard', icon: BarChart3, label: 'Dashboard', path: '/dashboard',active: true },
     { id: 'orders', icon: ShoppingCart, label: 'Orders', path: '/dashboard/orders' },
     { id: 'products', icon: Package, label: 'Products', path: '/dashboard/products' },
-    { id: 'customers', icon: Users, label: 'Customers', path: '/dashboard/customers' },
+    { id: 'customers', icon: Users, label: 'Customers', path: '/dashboard/customers'},
     { id: 'reports', icon: FileText, label: 'Reports', path: '/dashboard/reports' },
     { id: 'discounts', icon: Percent, label: 'Discounts', path: '/dashboard/discounts' },
     { id: 'integrations', icon: Link2, label: 'Integrations', path: '/dashboard/integrations' },

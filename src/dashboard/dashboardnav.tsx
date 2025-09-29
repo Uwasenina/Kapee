@@ -1,6 +1,26 @@
+import { useEffect, useState } from "react";
 import { ChevronDown, Search, Bell } from "lucide-react";
 
 const DashboardNav = () => {
+  const [fullName, setFullName] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    const storedName = localStorage.getItem("fullName");
+    const storedRole = localStorage.getItem("userRole");
+    setFullName(storedName);
+    setUserRole(storedRole);
+  }, []);
+
+   const getInitials = (name: string | null): string => {
+    if (!name) return "";
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase();
+  };
+
   return (
     <div className="px-6 py-4 bg-white border-b border-gray-200">
       <div className="flex items-center justify-between">
@@ -25,11 +45,11 @@ const DashboardNav = () => {
           
           <div className="flex items-center gap-3 cursor-pointer">
             <div className="flex items-center justify-center w-8 h-8 bg-orange-500 rounded-full">
-              <span className="text-sm font-medium text-white">NY</span>
+              <span className="text-sm font-medium text-white"> {getInitials(fullName)}</span>
             </div>
             <div>
-              <div className="text-sm font-medium text-gray-900">Nina Yvonne</div>
-              <div className="text-xs text-gray-500">Admin</div>
+              <div className="text-sm font-medium text-gray-900">{fullName}</div>
+              <div className="text-xs text-gray-500"> {userRole}</div>
             </div>
         
 

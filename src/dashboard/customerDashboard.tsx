@@ -1,60 +1,75 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import createAxiosClient from "../hooks/axiosClient";
 
-interface IUser {
+interface User {
   _id: string;
   fullName: string;
   email: string;
   userRole: string;
+  createdAt?: string;
 }
 
-function CustomerDashboard() {
-  const [users, setUsers] = useState<IUser[]>([]);
+const CustomersPage: React.FC = () => {
+  const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
+  const apiClient = createAxiosClient();
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const token = localStorage.getItem("accessToken"); // if login saved token
-        const response = await axios.get("#", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUsers(response.data);
-      } catch (err) {
-        console.error("❌ Failed to fetch users:", err);
-      } finally {
+    apiClient
+      .get("/users")
+      .then((res) => {
+        setUsers(res.data.users);
         setLoading(false);
-      }
-    };
-
-    fetchUsers();
+      })
+      .catch((err) => {
+        console.error("Error fetching users:", err);
+        setLoading(false);
+      });
   }, []);
 
-  if (loading) return <p className="p-4">Loading users...</p>;
-
   return (
-    <div className="p-6">
-      <h2 className="mb-4 text-2xl font-bold">User Dashboard</h2>
-      <table className="w-full border border-gray-300">
-        <thead>
-          <tr className="text-black bg-yellow-400">
-            <th className="p-2 border">Name</th>
-            <th className="p-2 border">Email</th>
-            <th className="p-2 border">Role</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user._id} className="text-center">
-              <td className="p-2 border">{user.fullName}</td>
-              <td className="p-2 border">{user.email}</td>
-              <td className="p-2 border">{user.userRole}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="min-h-screen p-6 bg-gray-50">
+      <h1 className="mb-4 text-2xl font-bold"> Customers</h1>
+
+      {loading ? (
+        <p>Loading users...</p>
+      ) : users.length === 0 ? (
+        <p>No users found.</p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white rounded-lg shadow">
+            <thead className="text-white bg-yellow-500">
+              <tr>
+                <th className="px-4 py-2 text-left">#</th>
+                <th className="px-4 py-2 text-left">Full Name</th>
+                <th className="px-4 py-2 text-left">Email</th>
+                <th className="px-4 py-2 text-left">Role</th>
+                <th className="px-4 py-2 text-left">Joined</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user, i) => (
+                <tr
+                  key={user._id}
+                  className="transition border-b hover:bg-gray-100"
+                >
+                  <td className="px-4 py-2">{i + 1}</td>
+                  <td className="px-4 py-2">{user.fullName}</td>
+                  <td className="px-4 py-2">{user.email}</td>
+                  <td className="px-4 py-2 capitalize">{user.userRole}</td>
+                  <td className="px-4 py-2">
+                    {user.createdAt
+                      ? new Date(user.createdAt).toLocaleDateString()
+                      : "—"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
-}
+};
 
-export default CustomerDashboard;
+export default CustomersPage;

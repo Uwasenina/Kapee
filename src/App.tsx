@@ -1,4 +1,3 @@
-
 import { BrowserRouter } from 'react-router-dom'
 import LayoutHandling from "./Layout/Layout";
 import EcommerceHero from './Components/Ecommerce'
@@ -19,39 +18,52 @@ import Dashboard from './dashboard/dashboard';
 import ProductDashboard from './dashboard/ProductDashboard';
 import RegisterModal from './Components/RegistrationForm';
 import OrdersDashboard from './dashboard/OrderDashboard';
-import CustomerDashboard from './dashboard/customerDashboard';
+import { CartProvider } from './Components/CartContext';
+import { AuthProvider } from './context/Authcontext';
+import CartPage from './Components/CartPage';
+import CheckoutPage from './Components/CheckoutPage';
+import CustomersPage from './dashboard/customerDashboard';
+
 function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
+    {/* Wrap everything with AuthProvider first, then CartProvider */}
+    <AuthProvider>
+      <CartProvider>
+        <BrowserRouter>
+          <Routes>
 
-          <Route path="/" element={<LayoutHandling/>}>
-            <Route index element={<EcommerceHero/>}/>
-            <Route path="home" element={<Home />} />
-            <Route path= "login"element={<Login/>}/>
-            <Route path='/registration' element={<RegisterModal/>} />
-            <Route path="/Product" element={<ProductCard />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="blog" element={<BlogPage />} />
-            <Route path="elements" element={<Elements />} />
-            <Route path="freeshipping" element={<Product1 />} />
-            <Route path="selling" element={<BestSellingProducts />} />
-            <Route path="shop" element={<ShopItem />} />
-            <Route path= "Pages"element={<KapeePage/>}/>
-            
-           </Route>
-            <Route path="/dashboard" element={<DashboardLayout children={undefined}/>}>
-            <Route index element={<Dashboard/>}/>
-            <Route path="products" element={<ProductDashboard />} />
-            <Route path="orders" element={<OrdersDashboard />} />
-            <Route path="customers" element={<CustomerDashboard />} />
-          </Route>
-          <Route path='/dashboard' element={<Dashboard/>}/>
-          {/* <Route path="*" element={<NotFound />} /> */}
-        </Routes>
-      </BrowserRouter>
+            <Route path="/" element={<LayoutHandling/>}>
+              <Route index element={<EcommerceHero/>}/>
+              <Route path="home" element={<Home />} />
+              <Route path= "login"element={<Login/>}/>
+              <Route path='/registration' element={<RegisterModal/>} />
+              <Route path="/Product" element={<ProductCard />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="checkout" element={<CheckoutPage />} />
+              <Route path="blog" element={<BlogPage />} />
+              <Route path="elements" element={<Elements />} />
+              <Route path="freeshipping" element={<Product1 />} />
+              <Route path="selling" element={<BestSellingProducts />} />
+              <Route path="shop" element={<ShopItem />} />
+              <Route path= "Pages"element={<KapeePage/>}/>
+              
+             </Route>
+              <Route path="/dashboard" element={<DashboardLayout children={undefined}/>}>
+              <Route index element={<Dashboard/>}/>
+              <Route path="products" element={<ProductDashboard />} />
+              <Route path="customers" element={<CustomersPage />} />
+              <Route path="orders" element={<OrdersDashboard />} />
+    
+            </Route>
+            <Route path='/dashboard' element={<Dashboard/>}/>
+            {/* <Route path="*" element={<NotFound />} /> */}
+          </Routes>
+        </BrowserRouter>
+      </CartProvider>
+    </AuthProvider>
      </>
   )
 }
