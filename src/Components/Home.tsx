@@ -26,36 +26,36 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-gradient-to-r from-pink-50 to-white">
         <div className="container px-4 py-12 mx-auto">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col items-center justify-between md:flex-row">
             {/* Left Arrow (hidden on mobile) */}
-            <button className="hidden p-2 transition-colors rounded-full sm:block hover:bg-gray-100">
+            <button className="hidden p-2 transition-colors rounded-full md:block hover:bg-gray-100">
               <ChevronLeft className="w-6 h-6 text-gray-600" />
             </button>
 
             {/* Hero Content */}
-            <div className="flex-1 max-w-6xl mx-4 sm:mx-8">
-              <div className="grid items-center grid-cols-1 gap-8 lg:grid-cols-2">
-                <div className="space-y-6 text-center lg:text-left">
-                  <p className="mb-2 text-sm font-medium tracking-wider text-gray-600 uppercase">
+            <div className="flex-1 max-w-6xl mx-4 text-center md:text-left">
+              <div className="grid items-center grid-cols-1 gap-8 md:grid-cols-2">
+                <div className="space-y-4">
+                  <p className="mb-2 text-xs font-medium tracking-wider text-gray-600 uppercase sm:text-sm">
                     NEW ARRIVALS
                   </p>
-                  <h1 className="text-3xl font-bold leading-tight text-gray-800 sm:text-4xl lg:text-6xl">
+                  <h1 className="text-3xl font-bold leading-tight text-gray-800 sm:text-4xl md:text-5xl lg:text-6xl">
                     SUMMER SALE
                   </h1>
-                  <p className="mt-4 text-xl font-semibold text-gray-700 sm:text-2xl lg:text-3xl">
+                  <p className="mt-2 text-lg font-semibold text-gray-700 sm:text-xl md:text-2xl lg:text-3xl">
                     MIN. 40% OFF
                   </p>
-                  <button className="px-6 py-3 font-semibold text-blue-500 transition-colors duration-300 bg-white border-2 border-blue-500 rounded hover:bg-blue-500 hover:text-white">
+                  <button className="px-6 py-3 mt-4 font-semibold text-blue-500 transition-colors duration-300 bg-white border-2 border-blue-500 rounded hover:bg-blue-500 hover:text-white">
                     SHOP NOW
                   </button>
                 </div>
 
                 {/* Hero Image */}
-                <div className="relative">
-                  <div className="max-w-sm mx-auto aspect-square">
+                <div className="relative flex justify-center">
+                  <div className="max-w-[280px] sm:max-w-sm md:max-w-md aspect-square">
                     <img
                       src="https://images.unsplash.com/photo-1521577352947-9bb58764b69a?w=500&h=500&fit=crop"
-                      alt="Woman in summer outfit with pink hat"
+                      alt="Woman in summer outfit"
                       className="object-cover w-full h-full rounded-lg"
                     />
                   </div>
@@ -64,7 +64,7 @@ const Home: React.FC = () => {
             </div>
 
             {/* Right Arrow (hidden on mobile) */}
-            <button className="hidden p-2 transition-colors rounded-full sm:block hover:bg-gray-100">
+            <button className="hidden p-2 transition-colors rounded-full md:block hover:bg-gray-100">
               <ChevronRight className="w-6 h-6 text-gray-600" />
             </button>
           </div>
@@ -75,8 +75,8 @@ const Home: React.FC = () => {
       <div className="container px-4 py-8 mx-auto">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* White Sneakers Promo */}
-          <div className="flex flex-col items-center justify-between p-6 bg-white rounded-lg shadow-sm sm:flex-row">
-            <div className="flex-1 text-center sm:text-left">
+          <div className="flex flex-col items-center justify-between p-6 bg-white rounded-lg shadow-sm md:flex-row">
+            <div className="flex-1 text-center md:text-left">
               <p className="mb-1 text-sm font-medium tracking-wider text-blue-500 uppercase">
                 WHITE SNEAKERS
               </p>
@@ -88,7 +88,7 @@ const Home: React.FC = () => {
                 SHOP NOW
               </button>
             </div>
-            <div className="mt-4 sm:mt-0 sm:ml-4">
+            <div className="mt-4 md:mt-0 md:ml-4">
               <img
                 src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=120&h=120&fit=crop"
                 alt="White sneakers"
@@ -98,8 +98,8 @@ const Home: React.FC = () => {
           </div>
 
           {/* Women's Fashion Promo */}
-          <div className="flex flex-col items-center justify-between p-6 bg-white rounded-lg shadow-sm sm:flex-row">
-            <div className="flex-1 text-center sm:text-left">
+          <div className="flex flex-col items-center justify-between p-6 bg-white rounded-lg shadow-sm md:flex-row">
+            <div className="flex-1 text-center md:text-left">
               <p className="mb-1 text-sm font-medium tracking-wider text-blue-500 uppercase">
                 WOMEN'S FASHION
               </p>
@@ -111,7 +111,7 @@ const Home: React.FC = () => {
                 SHOP NOW
               </button>
             </div>
-            <div className="flex mt-4 space-x-2 sm:mt-0 sm:ml-4">
+            <div className="flex mt-4 space-x-2 md:mt-0 md:ml-4">
               <img
                 src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=60&h=60&fit=crop"
                 alt="Handbag"
@@ -131,7 +131,7 @@ const Home: React.FC = () => {
 
       {/* Category Navigation */}
       <div className="container px-4 py-8 mx-auto">
-        <div className="grid grid-cols-3 gap-4 sm:grid-cols-5 lg:grid-cols-10">
+        <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-10">
           {categories.map((category, index) => (
             <div
               key={index}

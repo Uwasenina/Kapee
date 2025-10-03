@@ -4,11 +4,11 @@ import { Home, Heart, ShoppingCart, User } from "lucide-react";
 function Footer() {
   return (
     <>
-      <footer className="bg-gray-100 border-t mt-12 hidden md:block">
-        <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-5 gap-8">
+      <footer className="hidden mt-12 bg-gray-100 border-t md:block">
+        <div className="grid grid-cols-1 gap-8 px-6 py-10 mx-auto max-w-7xl md:grid-cols-5">
           <div>
             <h2 className="text-2xl font-bold text-gray-800">kapee.</h2>
-            <p className="text-sm text-gray-600 mt-3">
+            <p className="mt-3 text-sm text-gray-600">
               Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
             </p>
             <ul className="mt-4 space-y-2 text-sm text-gray-600">
@@ -19,7 +19,7 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="font-semibold mb-3">INFORMATION</h3>
+            <h3 className="mb-3 font-semibold">INFORMATION</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>About Us</li>
               <li>Store Location</li>
@@ -30,7 +30,7 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="font-semibold mb-3">OUR SERVICE</h3>
+            <h3 className="mb-3 font-semibold">OUR SERVICE</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>Privacy Policy</li>
               <li>Terms of Sale</li>
@@ -41,7 +41,7 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="font-semibold mb-3">MY ACCOUNT</h3>
+            <h3 className="mb-3 font-semibold">MY ACCOUNT</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>My Account</li>
               <li>My Shop</li>
@@ -52,8 +52,8 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="font-semibold mb-3">NEWSLETTER</h3>
-            <p className="text-sm text-gray-600 mb-3">
+            <h3 className="mb-3 font-semibold">NEWSLETTER</h3>
+            <p className="mb-3 text-sm text-gray-600">
               Subscribe to our mailing list to get the new updates!
             </p>
             <div className="flex gap-2">
@@ -69,25 +69,25 @@ function Footer() {
           </div>
         </div>
 
-        <div className="border-t py-4 text-center text-sm text-gray-500">
+        <div className="py-4 text-sm text-center text-gray-500 border-t">
           Kapee © 2025 by PressLayouts All Rights Reserved.
         </div>
       </footer>
-      <footer className="fixed bottom-0 w-full bg-white border-t flex justify-around py-2 text-gray-600 text-xs md:hidden">
+      <footer className="fixed bottom-0 flex justify-around w-full py-2 text-xs text-gray-600 bg-white border-t md:hidden">
         <NavLink to="/" className="flex flex-col items-center">
-          <Home className="h-5 w-5" />
+          <Home className="w-5 h-5" />
           <span>Shop</span>
         </NavLink>
         <NavLink to="/wishlist" className="flex flex-col items-center">
-          <Heart className="h-5 w-5" />
+          <Heart className="w-5 h-5" />
           <span>Wishlist</span>
         </NavLink>
         <NavLink to="/cart" className="flex flex-col items-center">
-          <ShoppingCart className="h-5 w-5" />
+          <ShoppingCart className="w-5 h-5" />
           <span>Cart</span>
         </NavLink>
         <NavLink to="/account" className="flex flex-col items-center">
-          <User className="h-5 w-5" />
+          <User className="w-5 h-5" />
           <span>Account</span>
         </NavLink>
       </footer>

@@ -47,20 +47,20 @@ const EcommerceHero: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Top Navigation */}
-      <nav className="bg-white border-b shadow-sm">
+      <nav className="sticky top-0 z-30 bg-white border-b shadow-sm">
         <div className="px-4 mx-auto max-w-7xl">
           <div className="flex items-center justify-between h-16">
             {/* Categories Button */}
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-gray-900 bg-yellow-400 rounded md:px-6 md:py-3 md:text-base"
+              className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-gray-900 transition-colors bg-yellow-400 rounded md:px-6 md:py-3 md:text-base hover:bg-yellow-500"
             >
               SHOP BY CATEGORIES
               <Menu className="w-5 h-5" />
             </button>
 
             {/* Desktop Nav */}
-            <div className="hidden space-x-8 md:flex">
+            <div className="hidden space-x-4 md:flex">
               {navigationItems.map((item, index) => (
                 <Link key={index} to={item.to}>
                   <button className="flex items-center gap-1 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 md:text-base">
@@ -100,9 +100,12 @@ const EcommerceHero: React.FC = () => {
       <div className="flex flex-col mx-auto md:flex-row max-w-7xl">
         {/* Sidebar */}
         <div
-          className={`fixed top-0 left-0 h-full bg-white shadow-lg z-20 transform transition-transform duration-300 md:relative md:w-64 md:translate-x-0 ${
-            isSidebarOpen ? "translate-x-0 w-64" : "-translate-x-full w-0"
-          }`}
+          className={`
+            fixed top-0 left-0 h-full bg-white shadow-lg z-20 transform transition-transform duration-300
+            w-64 md:relative md:w-64
+            ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+            md:translate-x-0
+          `}
         >
           <div className="p-6">
             <div className="space-y-1">
@@ -170,10 +173,12 @@ const EcommerceHero: React.FC = () => {
 
       {/* Product Cards */}
       <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="grid gap-8 sm:grid-cols-2 lg:flex lg:flex-row">
-          {/* Example placeholder for speaker + watch cards */}
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {/* Example placeholder cards */}
           <div className="p-6 text-center bg-white rounded-lg shadow">Speaker Card</div>
           <div className="p-6 text-center bg-white rounded-lg shadow">Watch Card</div>
+          <div className="p-6 text-center bg-white rounded-lg shadow">Headphone Card</div>
+          <div className="p-6 text-center bg-white rounded-lg shadow">Accessory Card</div>
         </div>
       </div>
 

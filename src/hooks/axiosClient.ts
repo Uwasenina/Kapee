@@ -1,7 +1,7 @@
 import axios, { type AxiosInstance, AxiosError, type AxiosResponse } from "axios";
 
 // get env once (outside axios.create)
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000/api";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000/api";
 
 const getToken = (): string | null => {
   if (typeof window !== "undefined") {

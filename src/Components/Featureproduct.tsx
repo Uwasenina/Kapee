@@ -1,7 +1,6 @@
 import React from 'react';
 import { Star, Heart } from 'lucide-react';
 
-// Product interface
 interface ProductProps {
   id: number;
   title: string;
@@ -15,7 +14,6 @@ interface ProductProps {
   isFeatured?: boolean;
 }
 
-// ProductCard component
 const ProductCard: React.FC<ProductProps> = ({
   title,
   category,
@@ -49,39 +47,32 @@ const ProductCard: React.FC<ProductProps> = ({
   };
 
   return (
-    <div className="relative transition-all duration-300 transform bg-white rounded-lg shadow-md group hover:shadow-xl hover:-translate-y-2 w-72">
-      {/* Featured Badge */}
+    <div className="relative w-full transition-all duration-300 transform bg-white rounded-lg shadow-md group hover:shadow-xl hover:-translate-y-1 sm:w-80 md:w-72 lg:w-64 xl:w-60 2xl:w-56">
       {isFeatured && (
         <div className="absolute z-10 px-2 py-1 text-xs font-bold text-white bg-red-500 rounded top-3 left-3">
           FEATURED
         </div>
       )}
-      
-      {/* Discount Badge */}
       {discount && (
         <div className="absolute z-10 px-2 py-1 text-xs font-bold text-white bg-green-500 rounded top-3 right-3">
           -{discount}
         </div>
       )}
 
-      {/* Wishlist Button */}
       <button className="absolute z-10 p-2 transition-opacity duration-300 bg-white rounded-full shadow-md opacity-0 top-3 right-3 group-hover:opacity-100 hover:bg-red-50">
         <Heart className="w-4 h-4 text-gray-600 hover:text-red-500" />
       </button>
 
-      {/* Product Image */}
       <div className="relative overflow-hidden rounded-t-lg">
         <img
           src={image}
           alt={title}
           className="object-cover w-full h-64 transition-transform duration-500 group-hover:scale-110"
           onError={(e) => {
-            // Fallback to placeholder if image fails to load
             e.currentTarget.src = `https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80`;
           }}
         />
-        
-        {/* Quick Action Overlay */}
+
         <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 bg-black opacity-0 bg-opacity-40 group-hover:opacity-100">
           <button className="px-6 py-2 font-semibold text-gray-900 transition-transform duration-200 transform scale-95 bg-white rounded-full hover:bg-gray-100 group-hover:scale-100">
             Quick View
@@ -89,32 +80,16 @@ const ProductCard: React.FC<ProductProps> = ({
         </div>
       </div>
 
-      {/* Product Info */}
       <div className="p-4">
-        {/* Category */}
-        <p className="mb-2 text-xs font-medium tracking-wider text-gray-500">
-          {category}
-        </p>
-
-        {/* Title */}
+        <p className="mb-2 text-xs font-medium tracking-wider text-gray-500">{category}</p>
         <h3 className="mb-3 font-semibold text-gray-900 transition-colors cursor-pointer line-clamp-2 hover:text-blue-600">
           {title}
         </h3>
-
-        {/* Rating */}
-        <div className="mb-3">
-          {renderStars(rating)}
-        </div>
-
-        {/* Price */}
+        <div className="mb-3">{renderStars(rating)}</div>
         <div className="flex items-center gap-2 mb-4">
           <span className="text-lg font-bold text-gray-900">{price}</span>
-          {oldPrice && (
-            <span className="text-sm text-gray-500 line-through">{oldPrice}</span>
-          )}
+          {oldPrice && <span className="text-sm text-gray-500 line-through">{oldPrice}</span>}
         </div>
-
-        {/* Add to Cart Button */}
         <button className="w-full py-2 font-medium text-white transition-colors duration-200 transform bg-gray-900 rounded-lg hover:bg-gray-800 hover:scale-105">
           Add to Cart
         </button>
@@ -123,7 +98,6 @@ const ProductCard: React.FC<ProductProps> = ({
   );
 };
 
-// Updated products data with working image URLs
 const products = [
   {
     id: 1,
@@ -185,22 +159,21 @@ const FeaturedProducts: React.FC = () => {
     <section className="py-16 bg-gray-50">
       <div className="px-6 mx-auto max-w-7xl">
         {/* Header */}
-        <div className="flex items-center justify-between mb-12">
+        <div className="flex flex-col items-start justify-between mb-12 md:flex-row">
           <div>
             <h2 className="mb-2 text-3xl font-bold text-gray-900">FEATURED PRODUCTS</h2>
             <p className="text-gray-600">Discover our handpicked collection of trending items</p>
           </div>
-          <button className="px-6 py-3 font-medium text-white transition-colors duration-200 bg-blue-600 rounded-lg hover:bg-blue-700">
+          <button className="px-6 py-3 mt-4 font-medium text-white transition-colors duration-200 bg-blue-600 rounded-lg hover:bg-blue-700 md:mt-0">
             VIEW ALL
           </button>
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 justify-items-center">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-items-center">
           {products.map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}
-          
         </div>
 
         {/* Load More Section */}

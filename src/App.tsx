@@ -23,6 +23,7 @@ import { AuthProvider } from './context/Authcontext';
 import CartPage from './Components/CartPage';
 import CheckoutPage from './Components/CheckoutPage';
 import CustomersPage from './dashboard/customerDashboard';
+import ForgotPassword from './Components/forgotPassword';
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
             <Route path="/" element={<LayoutHandling/>}>
               <Route index element={<EcommerceHero/>}/>
               <Route path="home" element={<Home />} />
+              <Route path="forgot-password" element={<ForgotPassword />} />
               <Route path= "login"element={<Login/>}/>
               <Route path='/registration' element={<RegisterModal/>} />
               <Route path="/Product" element={<ProductCard />} />
@@ -58,6 +60,7 @@ function App() {
               <Route path="orders" element={<OrdersDashboard />} />
     
             </Route>
+
             <Route path='/dashboard' element={<Dashboard/>}/>
             {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>

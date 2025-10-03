@@ -16,13 +16,13 @@ const CustomersPage: React.FC = () => {
 
   useEffect(() => {
     apiClient
-      .get("/users")
+      .get("/users/users")
       .then((res) => {
         setUsers(res.data.users);
         setLoading(false);
       })
-      .catch((err) => {
-        console.error("Error fetching users:", err);
+      .catch((err: any) => {
+        console.error("Error fetching users:", err.message);
         setLoading(false);
       });
   }, []);

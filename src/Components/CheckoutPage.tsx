@@ -27,7 +27,6 @@ function CheckoutPage() {
   };
 
   const handlePlaceOrder = () => {
-    
     const requiredFields = ["firstName", "lastName", "address", "city", "state", "zip", "phone", "email"];
     const emptyFields = requiredFields.filter(field => !formData[field as keyof typeof formData].trim());
 
@@ -37,7 +36,6 @@ function CheckoutPage() {
     }
 
     clearCart();
-
     setFormData(initialFormState);
     setError("");
 
@@ -45,21 +43,21 @@ function CheckoutPage() {
   };
 
   return (
-    <div className="px-6 py-10 max-w-6xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Checkout</h1>
+    <div className="max-w-6xl px-4 py-10 mx-auto">
+      <h1 className="mb-6 text-2xl font-bold text-center md:text-left">Checkout</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-       
-        <div className="md:col-span-2 bg-white p-6 rounded-2xl shadow">
-          <h2 className="text-xl font-semibold mb-4">Billing details</h2>
-          {error && <p className="text-red-500 mb-4">{error}</p>}
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        {/* Billing Details */}
+        <div className="p-6 bg-white shadow md:col-span-2 rounded-2xl">
+          <h2 className="mb-4 text-xl font-semibold">Billing Details</h2>
+          {error && <p className="mb-4 text-red-500">{error}</p>}
           <form className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <input
                 type="text"
                 name="firstName"
                 placeholder="First name *"
-                className="border p-2 w-full rounded"
+                className="w-full p-2 border rounded"
                 value={formData.firstName}
                 onChange={handleChange}
               />
@@ -67,7 +65,7 @@ function CheckoutPage() {
                 type="text"
                 name="lastName"
                 placeholder="Last name *"
-                className="border p-2 w-full rounded"
+                className="w-full p-2 border rounded"
                 value={formData.lastName}
                 onChange={handleChange}
               />
@@ -77,7 +75,7 @@ function CheckoutPage() {
               type="text"
               name="company"
               placeholder="Company name (optional)"
-              className="border p-2 w-full rounded"
+              className="w-full p-2 border rounded"
               value={formData.company}
               onChange={handleChange}
             />
@@ -85,7 +83,7 @@ function CheckoutPage() {
               type="text"
               name="address"
               placeholder="Street address *"
-              className="border p-2 w-full rounded"
+              className="w-full p-2 border rounded"
               value={formData.address}
               onChange={handleChange}
             />
@@ -93,91 +91,96 @@ function CheckoutPage() {
               type="text"
               name="apartment"
               placeholder="Apartment, suite, etc. (optional)"
-              className="border p-2 w-full rounded"
+              className="w-full p-2 border rounded"
               value={formData.apartment}
               onChange={handleChange}
             />
-            <input
-              type="text"
-              name="city"
-              placeholder="Town / City *"
-              className="border p-2 w-full rounded"
-              value={formData.city}
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="state"
-              placeholder="State *"
-              className="border p-2 w-full rounded"
-              value={formData.state}
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="zip"
-              placeholder="ZIP Code *"
-              className="border p-2 w-full rounded"
-              value={formData.zip}
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="phone"
-              placeholder="Phone *"
-              className="border p-2 w-full rounded"
-              value={formData.phone}
-              onChange={handleChange}
-            />
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <input
+                type="text"
+                name="city"
+                placeholder="Town / City *"
+                className="w-full p-2 border rounded"
+                value={formData.city}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="state"
+                placeholder="State *"
+                className="w-full p-2 border rounded"
+                value={formData.state}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <input
+                type="text"
+                name="zip"
+                placeholder="ZIP Code *"
+                className="w-full p-2 border rounded"
+                value={formData.zip}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="phone"
+                placeholder="Phone *"
+                className="w-full p-2 border rounded"
+                value={formData.phone}
+                onChange={handleChange}
+              />
+            </div>
             <input
               type="email"
               name="email"
               placeholder="Email address *"
-              className="border p-2 w-full rounded"
+              className="w-full p-2 border rounded"
               value={formData.email}
               onChange={handleChange}
             />
-
             <textarea
               name="notes"
               placeholder="Order notes (optional)"
-              className="border p-2 w-full rounded"
+              className="w-full p-2 border rounded"
               value={formData.notes}
               onChange={handleChange}
             />
           </form>
         </div>
 
-        
-        <div className="bg-white p-6 rounded-2xl shadow">
-          <h2 className="text-xl font-semibold mb-4">Your order</h2>
-          {cart.map(item => (
-            <div key={item.id} className="flex justify-between border-b pb-2 mb-2">
-              <span>{item.name} × {item.quantity}</span>
-              <span>Frw {(item.price * item.quantity).toFixed(2)}</span>
-            </div>
-          ))}
+        {/* Order Summary */}
+        <div className="flex flex-col p-6 bg-white shadow rounded-2xl">
+          <h2 className="mb-4 text-xl font-semibold">Your order</h2>
+          <div className="flex flex-col gap-2 mb-4 overflow-y-auto max-h-64">
+            {cart.map(item => (
+              <div key={item.id} className="flex justify-between pb-2 text-sm border-b sm:text-base">
+                <span>{item.name} × {item.quantity}</span>
+                <span>Frw {(item.price * item.quantity).toFixed(2)}</span>
+              </div>
+            ))}
+          </div>
 
-          <div className="flex justify-between">
+          <div className="flex justify-between text-sm sm:text-base">
             <span>Subtotal</span>
             <span>Frw {cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)}</span>
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-between text-sm sm:text-base">
             <span>Shipping</span>
             <span>Frw 500</span>
           </div>
-          <div className="flex justify-between font-bold border-t pt-2 mt-2">
+          <div className="flex justify-between pt-2 mt-2 text-sm font-bold border-t sm:text-base">
             <span>Total</span>
             <span>Frw {(cart.reduce((sum, item) => sum + item.price * item.quantity,0) + 500).toFixed(2)}</span>
           </div>
 
-          <p className="text-sm text-gray-600 mt-4">
+          <p className="mt-4 text-sm text-gray-600">
             Sorry, it seems that there are no available payment methods.
             Please contact us if you require assistance or wish to make alternate arrangements.
           </p>
 
           <button
-            className="mt-4 w-full bg-yellow-400 hover:bg-black text-white py-2 rounded"
+            className="w-full py-2 mt-4 text-white transition bg-yellow-400 rounded hover:bg-black"
             onClick={handlePlaceOrder}
           >
             Place Order

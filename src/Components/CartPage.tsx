@@ -3,7 +3,7 @@ import { useCart, type CartItem } from "./CartContext";
 import { Link } from "react-router-dom";
 import { Trash2, ShoppingCart, Lock } from "lucide-react"; 
 import { Notify } from "notiflix";
-import { useAuth } from "../context/Authcontext";
+import { useAuth } from "../context/AuthContext";
 
 const CartPage = () => {
   const { cart, addToCart, removeFromCart } = useCart();
@@ -20,10 +20,9 @@ const CartPage = () => {
     setCoupon("");
   };
 
-  // Show loading state
   if (loading) {
     return (
-      <div className="max-w-6xl px-6 py-8 mx-auto">
+      <div className="max-w-6xl px-4 py-8 mx-auto">
         <div className="flex items-center justify-center h-64">
           <div className="text-lg">Loading...</div>
         </div>
@@ -31,26 +30,25 @@ const CartPage = () => {
     );
   }
 
-  // Show authentication required message
   if (!isAuthenticated) {
     return (
-      <div className="max-w-6xl px-6 py-8 mx-auto">
+      <div className="max-w-6xl px-4 py-8 mx-auto">
         <div className="flex flex-col items-center justify-center h-64 space-y-4">
           <Lock size={64} className="text-gray-400" />
           <h2 className="text-2xl font-bold text-gray-700">Authentication Required</h2>
           <p className="text-center text-gray-600">
             You need to be logged in to view and manage your shopping cart.
           </p>
-          <div className="flex mt-6 space-x-4">
+          <div className="flex flex-col w-full gap-2 mt-6 sm:flex-row sm:justify-center sm:gap-4">
             <Link 
               to="/login" 
-              className="px-6 py-2 text-black transition-colors bg-yellow-400 rounded hover:bg-yellow-500"
+              className="px-6 py-2 text-center text-black transition-colors bg-yellow-400 rounded hover:bg-yellow-500"
             >
               Login
             </Link>
             <Link 
               to="/registration" 
-              className="px-6 py-2 text-white transition-colors bg-gray-800 rounded hover:bg-gray-900"
+              className="px-6 py-2 text-center text-white transition-colors bg-gray-800 rounded hover:bg-gray-900"
             >
               Sign Up
             </Link>
@@ -61,7 +59,7 @@ const CartPage = () => {
   }
 
   return (
-    <div className="max-w-6xl px-6 py-8 mx-auto space-y-6">
+    <div className="max-w-6xl px-4 py-8 mx-auto space-y-6">
       <div className="flex items-center space-x-2">
         <ShoppingCart size={28} />
         <h1 className="text-2xl font-bold">Your Cart</h1>
@@ -83,7 +81,7 @@ const CartPage = () => {
         <>
           {/* Cart Table */}
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
+            <table className="w-full text-left border-collapse min-w-[600px] sm:min-w-full">
               <thead>
                 <tr className="border-b">
                   <th className="p-2">Remove</th>
@@ -103,7 +101,7 @@ const CartPage = () => {
                         onClick={() => removeFromCart(item.id)}
                         title="Remove item"
                       >
-                        <Trash2 size={20} className="text-red-500" />
+                        <Trash2 size={20} />
                       </button>
                     </td>
                     <td className="p-2">
@@ -112,17 +110,17 @@ const CartPage = () => {
                     <td className="p-2 font-medium">{item.name}</td>
                     <td className="p-2">Frw {item.price.toFixed(2)}</td>
                     <td className="p-2">
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center justify-center space-x-2">
                         <button
-                          className="px-3 py-1 transition-colors bg-gray-200 rounded hover:bg-gray-300"
+                          className="px-3 py-1 text-sm transition-colors bg-gray-200 rounded hover:bg-gray-300 sm:px-2 sm:py-0.5"
                           onClick={() => removeFromCart(item.id)}
                           disabled={item.quantity <= 1}
                         >
                           -
                         </button>
-                        <span className="w-8 font-medium text-center">{item.quantity}</span>
+                        <span className="w-8 text-sm font-medium text-center sm:text-xs">{item.quantity}</span>
                         <button
-                          className="px-3 py-1 transition-colors bg-gray-200 rounded hover:bg-gray-300"
+                          className="px-3 py-1 text-sm transition-colors bg-gray-200 rounded hover:bg-gray-300 sm:px-2 sm:py-0.5"
                           onClick={() =>
                             addToCart({
                               id: item.id,
@@ -144,7 +142,7 @@ const CartPage = () => {
           </div>
 
           {/* Coupon Input */}
-          <div className="flex gap-2 mt-4">
+          <div className="flex flex-col gap-2 mt-4 sm:flex-row">
             <input
               type="text"
               placeholder="Coupon code"

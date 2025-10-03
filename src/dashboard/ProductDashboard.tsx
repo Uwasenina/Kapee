@@ -32,7 +32,7 @@ const ProductDashboard: React.FC = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await apiClient.get("/products");
+      const res = await apiClient.get("/products/products");
       setProducts(res.data.products || []);
     } catch (err) {
       console.error("Error fetching products:", err);
@@ -43,7 +43,7 @@ const ProductDashboard: React.FC = () => {
   const handleDelete = async (id: string) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
-        await apiClient.delete(`/products/${id}`);
+        await apiClient.delete(`/products/products/${id}`);
         setProducts(products.filter((p) => p._id !== id));
       } catch (err) {
         console.error("Error deleting product:", err);
@@ -70,7 +70,7 @@ const ProductDashboard: React.FC = () => {
       formData.append("category", editProduct.category);
       if (imageFile) formData.append("image", imageFile);
 
-      const res = await apiClient.put(`/products/${editProduct._id}`, formData, {
+      const res = await apiClient.put(`/products/products/${editProduct._id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -95,7 +95,7 @@ const ProductDashboard: React.FC = () => {
       formData.append("category", newProduct.category);
       if (imageFile) formData.append("image", imageFile);
 
-      const res = await apiClient.post("/products", formData, {
+      const res = await apiClient.post("products/products", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
