@@ -19,7 +19,7 @@ import ProductDashboard from './dashboard/ProductDashboard';
 import RegisterModal from './Components/RegistrationForm';
 import OrdersDashboard from './dashboard/OrderDashboard';
 import { CartProvider } from './Components/CartContext';
-import { AuthProvider } from './context/Authcontext';
+import { AuthProvider } from './context/AuthContext';
 import CartPage from './Components/CartPage';
 import CheckoutPage from './Components/CheckoutPage';
 import CustomersPage from './dashboard/customerDashboard';

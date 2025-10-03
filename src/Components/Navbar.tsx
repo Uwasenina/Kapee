@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Search, User, ShoppingCart, Menu, Heart, X } from "lucide-react";
 import { useCart, type CartItem } from "./CartContext";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/Authcontext";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar: React.FC = () => {
   const { cart } = useCart();
