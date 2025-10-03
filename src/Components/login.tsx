@@ -4,7 +4,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { useForm } from "react-hook-form";
 import Notiflix from "notiflix";
 import createAxiosClient, { setToken } from "../hooks/axiosClient";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/Authcontext";
 
 interface LoginFormInputs {
   email: string;

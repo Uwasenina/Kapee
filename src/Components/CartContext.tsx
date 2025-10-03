@@ -1,7 +1,7 @@
 // components/CartContext.tsx
 import { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/Authcontext";
 import { Notify } from "notiflix";
 
 // Updated CartItem type to accept string id

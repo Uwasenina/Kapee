@@ -3,7 +3,7 @@ import { useCart, type CartItem } from "./CartContext";
 import { Link } from "react-router-dom";
 import { Trash2, ShoppingCart, Lock } from "lucide-react"; 
 import { Notify } from "notiflix";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/Authcontext";
 
 const CartPage = () => {
   const { cart, addToCart, removeFromCart } = useCart();
